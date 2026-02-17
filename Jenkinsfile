@@ -38,7 +38,7 @@ pipeline {
                 script{
                     withDockerRegistry(credentialsId: 'docker_creds'){
                 
-                        sh '''docker build -t javamavenappstage.
+                        sh '''docker build -t javamavenappstage .
                         docker tag javamavenappstage akhik/javamavenappstagelatest
                         docker push  akhik/javamavenappstagelatest'''
                       } 
