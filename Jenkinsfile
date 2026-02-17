@@ -32,7 +32,8 @@ pipeline {
 
                 }  
             }
-        }        stage('Docker images - Push to dockerhub') {
+        }        
+        stage('Docker images - Push to dockerhub') {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker_creds'){
