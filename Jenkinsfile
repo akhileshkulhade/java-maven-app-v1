@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Git clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/akhileshkulhade/java-maven-app-v1.git'
+                git branch: 'main', url: 'https://github.com/Aseemakram19/maven-app.git'
             }
         }
         stage('maven war file build') {
