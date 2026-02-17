@@ -24,10 +24,10 @@ pipeline {
             steps {
                 script{
                         sh '''
-                        docker stop javamavenappstage_container || true
-                        docker rm javamavenappstae_container || true
-                        docker rmi javamavenappstage || true
-                        docker rmi akhik/javamavenappstage:latest || true
+                        docker stop javamavenappdev_container || true
+                        docker rm javamavenappsdev_container || true
+                        docker rmi javamavenappdev || true
+                        docker rmi akhik/javamavenappdev:latest || true
                         '''
 
                 }  
