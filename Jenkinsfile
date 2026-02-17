@@ -32,7 +32,7 @@ pipeline {
         stage('Docker images - Push to dockerhub') {
             steps {
                 script{
-                    withDockerRegistry(credentialsId: 'docker', toolname: 'docker'){
+                    withDockerRegistry(credentialsId: 'docker_creds'){
                 
                         sh '''docker build -t javamavenapp .
                         docker tag javamavenapp akhik/javamavenapp:latest
