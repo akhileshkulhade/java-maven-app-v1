@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Git clone') {
             steps {
-                git branch: 'create-dev', url: 'https://github.com/akhileshkulhade/java-maven-app-v1.git'
+                git branch: 'main', url: 'https://github.com/Aseemakram19/maven-app.git'
             }
         }
         stage('maven war file build') {
@@ -20,34 +20,34 @@ pipeline {
                sh 'mvn clean package'
             }
         }
-         stage('Docker images/conatiner remove') {
+        stage('Docker images/conatiner remove') {
             steps {
                 script{
                         sh '''
-                        docker stop javamavenappdev_container || true
-                        docker rm javamavenappsdev_container || true
-                        docker rmi javamavenappdev || true
-                        docker rmi akhik/javamavenappdev:latest || true
+                        docker stop javamavenapp_container || true
+                        docker rm javamavenapp_container || true
+                        docker rmi javamavenapp || true
+                        docker rmi akhik/javamavenapp:latest || true
                         '''
 
                 }  
             }
-        }        
+        }
         stage('Docker images - Push to dockerhub') {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker_creds'){
                 
-                        sh '''docker build -t javamavenappdev .
-                        docker tag javamavenappdev akhik/javamavenappdev:latest
-                        docker push  akhik/javamavenappdev:latest'''
+                        sh '''docker build -t javamavenapp .
+                        docker tag javamavenapp akhik/javamavenapp:latest
+                        docker push  akhik/javamavenapp:latest'''
                       } 
                 }
             }
         }
         stage('docker container of app') {
             steps {
-               sh 'docker run -d -p 9001:8080 --name javamavenappdev_container -t akhik/javamavenappdev:latest'
+               sh 'docker run -d -p 9000:8080 --name javamavenapp_container -t akhik/javamavenapp:latest'
             }
         }
         
