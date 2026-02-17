@@ -23,9 +23,13 @@ pipeline {
         stage('Docker images/conatiner remove') {
             steps {
                 script{
-                        sh '''docker stop javamavenapp_container
-                        docker rm javamavenapp_container
-                        docker rmi javamavenapp akhik/javamavenapp:latest'''
+                        sh '''
+                        docker stop javamavenapp_container || true
+                        docker rm javamavenapp_container || true
+                        docker rmi javamavenapp || true
+                        docker rmi akhik/javamavenapp:latest || true
+                        '''
+
                 }  
             }
         }
