@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Git clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aseemakram19/maven-app.git'
+                git branch: 'fentec', url: 'https://github.com/Aseemakram19/maven-app.git'
             }
         }
         stage('maven war file build') {
@@ -24,10 +24,10 @@ pipeline {
             steps {
                 script{
                         sh '''
-                        docker stop javamavenapp_container || true
-                        docker rm javamavenapp_container || true
-                        docker rmi javamavenapp || true
-                        docker rmi akhik/javamavenapp:latest || true
+                        docker stop javamavenappfen_container || true
+                        docker rm javamavenappfen_container || true
+                        docker rmi javamavenappfen || true
+                        docker rmi akhik/javamavenappfen:latest || true
                         '''
 
                 }  
@@ -38,16 +38,16 @@ pipeline {
                 script{
                     withDockerRegistry(credentialsId: 'docker_creds'){
                 
-                        sh '''docker build -t javamavenapp .
-                        docker tag javamavenapp akhik/javamavenapp:latest
-                        docker push  akhik/javamavenapp:latest'''
+                        sh '''docker build -t javamavenappfen .
+                        docker tag javamavenappfen akhik/javamavenappfen:latest
+                        docker push  akhik/javamavenappfen:latest'''
                       } 
                 }
             }
         }
         stage('docker container of app') {
             steps {
-               sh 'docker run -d -p 9000:8080 --name javamavenapp_container -t akhik/javamavenapp:latest'
+               sh 'docker run -d -p 9003:8080 --name javamavenappfen_container -t akhik/javamavenappfen:latest'
             }
         }
         
