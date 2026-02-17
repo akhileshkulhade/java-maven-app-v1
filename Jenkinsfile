@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Git clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aseemakram19/maven-app.git'
+                git branch: 'dev', url: 'https://github.com/Aseemakram19/maven-app.git'
             }
         }
         stage('maven war file build') {
@@ -38,16 +38,16 @@ pipeline {
                 script{
                     withDockerRegistry(credentialsId: 'docker_creds'){
                 
-                        sh '''docker build -t javamavenapp .
-                        docker tag javamavenapp akhik/javamavenapp:latest
-                        docker push  akhik/javamavenapp:latest'''
+                        sh '''docker build -t javamavenappdev .
+                        docker tag javamavenappdev akhik/javamavenappdev:latest
+                        docker push  akhik/javamavenappdev:latest'''
                       } 
                 }
             }
         }
         stage('docker container of app') {
             steps {
-               sh 'docker run -d -p 9000:8080 --name javamavenapp_container -t akhik/javamavenapp:latest'
+               sh 'docker run -d -p 9001:8080 --name javamavenappdev_container -t akhik/javamavenappdev:latest'
             }
         }
         
