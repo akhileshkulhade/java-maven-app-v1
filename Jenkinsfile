@@ -12,25 +12,12 @@ pipeline {
         }
         stage('Git clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/Aseemakram19/maven-app.git'
+                git branch: 'create-dev', url: 'https://github.com/Aseemakram19/maven-app.git'
             }
         }
         stage('maven war file build') {
             steps {
                sh 'mvn clean package'
-            }
-        }
-        stage('Docker images/conatiner remove') {
-            steps {
-                script{
-                        sh '''
-                        docker stop javamavenappdev_container || true
-                        docker rm javamavenappdev_container || true
-                        docker rmi javamavenappdev || true
-                        docker rmi akhik/javamavenappdev:latest || true
-                        '''
-
-                }  
             }
         }
         stage('Docker images - Push to dockerhub') {
