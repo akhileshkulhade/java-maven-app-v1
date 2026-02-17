@@ -20,7 +20,19 @@ pipeline {
                sh 'mvn clean package'
             }
         }
-        stage('Docker images - Push to dockerhub') {
+         stage('Docker images/conatiner remove') {
+            steps {
+                script{
+                        sh '''
+                        docker stop javamavenappstage_container || true
+                        docker rm javamavenappstae_container || true
+                        docker rmi javamavenappstage || true
+                        docker rmi akhik/javamavenappstage:latest || true
+                        '''
+
+                }  
+            }
+        }        stage('Docker images - Push to dockerhub') {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker_creds'){
