@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Git clone') {
             steps {
-                git branch: 'fentec', url: 'https://github.com/akhileshkulhade/java-maven-app-v1.git
+                git branch: 'fentec', url: 'https://github.com/akhileshkulhade/java-maven-app-v1.git'
             }
         }
         stage('maven war file build') {
